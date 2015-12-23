@@ -1,0 +1,24 @@
+[
+  {
+  "title": "Reggae", "id": 1, "cover": "http://ionicframework.com/img/docs/blue-album.jpg", "content": "content1111"
+  },
+  {
+    "title": "Chill", "id": 2, "cover": "http://ionicframework.com/img/docs/siamese-dream.jpg", "content": "content2222"
+  },
+  {
+    "title": "Dubstep", "id": 3, "cover": "http://ionicframework.com/img/docs/nevermind.jpg", "content": "content3333"
+  },
+  {
+    "title": "Indie", "id": 4, "cover": "http://ionicframework.com/img/docs/dookie.jpg", "content": "content4444"
+  },
+  {
+    "title": "Rap", "id": 5, "cover": "http://ionicframework.com/img/docs/blue-album.jpg", "content": "content5555"
+  },
+  {
+    "title": "Cowbell", "id": 6, "cover": "http://ionicframework.com/img/docs/blue-album.jpg", "content": "content6666"
+  },
+  {
+    "title": "Cowbell", "id": 7, "cover": "http://ionicframework.com/img/docs/siamese-dream.jpg", "content": "content7777"
+  }
+]
+
