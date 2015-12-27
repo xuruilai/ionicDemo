@@ -41,7 +41,7 @@ angular.module('starter.controllers', [])
   };
 })
 
-.controller('PlaylistsCtrl', ['$http','$scope', 'PlayListService', function($http, $scope, PlayList) {
+.controller('PlaylistsCtrl', ['$http','$scope', 'PlayListService', function($http, $scope, PlayListService) {
   //$http.jsonp("http://127.0.0.1:8000/app/playList/playList.json?callback=JSON_CALLBACK&type=json")
   //      .success(function(data) {
   //      // 数据
@@ -54,7 +54,7 @@ angular.module('starter.controllers', [])
   //      }
   //    );
 
-  $scope.playlists = PlayList.query();
+  $scope.playlists = PlayListService.query();
 }])
 
 
