@@ -57,10 +57,10 @@ angular.module('starter', ['ionic', 'ngCordova',  'starter.controllers', 'starte
     abstract: true,
     views: {
       'main-view': {
-          templateUrl: 'templates/menu.html'
+          templateUrl: 'templates/menu.html',
+          controller: 'AppCtrl'
       }
-    },
-    controller: 'AppCtrl'
+    }
   })
   .state('app.search', {
     url: '/search',

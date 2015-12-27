@@ -25,7 +25,8 @@ angular.module('starter.controllers', [])
   };
 
   // Open the login modal
-  $scope.login = function() {
+    $scope.login = function() {
+      console.log(123123);
     $scope.modal.show();
   };
 
