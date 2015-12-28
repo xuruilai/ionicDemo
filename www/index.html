@@ -14,7 +14,7 @@
 
     <!-- ionic/angularjs js -->
     <script src="lib/ionic/js/ionic.bundle.js"></script>
-    <script src="lib/ionic/js/angular/angular-resource.min.js"></script>
+    <script src="lib/angular-resource/angular-resource.min.js"></script>
 
     <!-- 添加ng-cordova支持，提供調用移動設備硬件接口 -->
     <script src="lib/ngCordova/dist/ng-cordova.js"></script>
@@ -29,10 +29,7 @@
   </head>
 
   <body ng-app="starter">
-    <ion-nav-view>
 
-
-    </ion-nav-view>
-
+  <ion-nav-view name="main-view" class="main-view"></ion-nav-view>
   </body>
 </html>

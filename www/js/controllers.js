@@ -25,7 +25,8 @@ angular.module('starter.controllers', [])
   };
 
   // Open the login modal
-  $scope.login = function() {
+    $scope.login = function() {
+      console.log(123123);
     $scope.modal.show();
   };
 
@@ -48,7 +49,7 @@ angular.module('starter.controllers', [])
   }
 })
 
-.controller('PlaylistsCtrl', ['$http','$scope', 'PlayListService', function($http, $scope, PlayList) {
+.controller('PlaylistsCtrl', ['$http','$scope', 'PlayListService', function($http, $scope, PlayListService) {
   //$http.jsonp("http://127.0.0.1:8000/app/playList/playList.json?callback=JSON_CALLBACK&type=json")
   //      .success(function(data) {
   //      // 数据
@@ -60,7 +61,9 @@ angular.module('starter.controllers', [])
   //        alert("error");
   //      }
   //    );
-  $scope.playlists = PlayList.query();
+
+
+  $scope.playlists = PlayListService.query();
 }])
 
 

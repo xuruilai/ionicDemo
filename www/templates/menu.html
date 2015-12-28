@@ -4,41 +4,50 @@
       <ion-nav-back-button>
       </ion-nav-back-button>
 
-      <ion-nav-buttons side="left">
-        <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
-        </button>
-      </ion-nav-buttons>
 
-      <ion-nav-buttons side="right">
-        <button class="button button-icon button-clear ion-search" menu-toggle="right" ng-click="showSearch()">
-        </button>
-      </ion-nav-buttons>
-
+      <!--<ion-nav-buttons side="left">-->
+        <!--<button class="button button-icon button-clear ion-navicon" menu-toggle="left">-->
+        <!--</button>-->
+      <!--</ion-nav-buttons>-->
     </ion-nav-bar>
-    <ion-nav-view name="menuContent"></ion-nav-view>
+    <ion-nav-view name="menuContent" class="menuContent"></ion-nav-view>
   </ion-side-menu-content>
-
-  <ion-side-menu side="left">
-    <ion-header-bar class="bar-stable">
-      <h1 class="title">Left</h1>
-    </ion-header-bar>
-    <ion-content>
-      <ion-list>
-        <ion-item menu-close ng-click="login()">
-          Login
-        </ion-item>
-        <ion-item menu-close href="#/app/search">
-          Search
-        </ion-item>
-        <ion-item menu-close href="#/app/browse">
-          Browse
-        </ion-item>
-        <ion-item menu-close href="#/app/playlists">
-          Playlists
-        </ion-item>
-      </ion-list>
-    </ion-content>
-  </ion-side-menu>
+  <ion-tabs class="tabs-stable tabs-icon-top">
 
 
+    <ion-tab href="#/app/playlists" title="微信" icon-on="ion-ios-chatbubble balanced" icon-off="ion-ios-chatbubble-outline">
+    </ion-tab>
+
+    <ion-tab href="#/app/search" title="通讯录" icon-on="ion-ios-people balanced" icon-off="ion-ios-people-outline">
+    </ion-tab>
+
+    <ion-tab href="#/app/browse" title="发现" icon-on="ion-ios-navigate balanced" icon-off="ion-ios-navigate-outline">
+    </ion-tab>
+
+    <ion-tab title="我" icon-on="ion-ios-person balanced" icon-off="ion-ios-person-outline" on-select="login()" >
+    </ion-tab>
+
+  </ion-tabs>
+
+  <!--<ion-side-menu side="left">-->
+    <!--<ion-header-bar class="bar-stable">-->
+      <!--<h1 class="title">Left</h1>-->
+    <!--</ion-header-bar>-->
+    <!--<ion-content>-->
+      <!--<ion-list>-->
+        <!--<ion-item menu-close ng-click="login()">-->
+          <!--Login-->
+        <!--</ion-item>-->
+        <!--<ion-item menu-close href="#/app/search">-->
+          <!--Search-->
+        <!--</ion-item>-->
+        <!--<ion-item menu-close href="#/app/browse">-->
+          <!--Browse-->
+        <!--</ion-item>-->
+        <!--<ion-item menu-close href="#/app/playlists">-->
+          <!--Playlists-->
+        <!--</ion-item>-->
+      <!--</ion-list>-->
+    <!--</ion-content>-->
+  <!--</ion-side-menu>-->
 </ion-side-menus>

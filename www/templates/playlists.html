@@ -10,13 +10,14 @@
 
 <ion-view view-title="Playlists">
   <ion-content>
-    <div class="list list-inset" ng-model="searchForm" ng-show="{{searchFlag}}">
+
+    <div class="list list-inset">
       <!--<label class="item item-input">-->
         <!--<i class="icon ion-search placeholder-icon"></i>-->
-        any:<input type="text" placeholder="Search" ng-model="search.$"><br>
-        title:<input type="text" placeholder="Search" ng-model="search.title"><br>
-        content:<input type="text" placeholder="Search" ng-model="search.content"><br>
-
+        <i class="icon ion-ios-search-strong"></i>Any <input type="text" placeholder="Any" ng-model="search.$">
+        <i class="icon ion-ios-star"></i>Title <input type="text" placeholder="Title" ng-model="search.title">
+        <i class="icon ion-ios-analytics"></i>Content <input type="text" placeholder="Content" ng-model="search.content">
+        <i class="ion-ios-paperplane"></i>CheckBox <ion-checkbox ng-model="filter.blue" ng-click="login()">Red</ion-checkbox>
       <!--</label>-->
     </div>
     <ion-list>
@@ -27,5 +28,6 @@
       </ion-item>
     </ion-list>
   </ion-content>
+
 </ion-view>
 
