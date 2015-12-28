@@ -10,14 +10,17 @@
 
 <ion-view view-title="Playlists">
   <ion-content>
-    <div class="list list-inset">
-      <label class="item item-input">
-        <i class="icon ion-search placeholder-icon"></i>
-        <input type="text" placeholder="Search" ng-model="test">
-      </label>
+    <div class="list list-inset" ng-model="searchForm" ng-show="{{searchFlag}}">
+      <!--<label class="item item-input">-->
+        <!--<i class="icon ion-search placeholder-icon"></i>-->
+        any:<input type="text" placeholder="Search" ng-model="search.$"><br>
+        title:<input type="text" placeholder="Search" ng-model="search.title"><br>
+        content:<input type="text" placeholder="Search" ng-model="search.content"><br>
+
+      <!--</label>-->
     </div>
     <ion-list>
-      <ion-item class="item item-thumbnail-left" ng-repeat="playlist in playlists | filter:test | orderBy:'title'" href="#/app/playlists/{{playlist.id}}">
+      <ion-item class="item item-thumbnail-left" ng-repeat="playlist in playlists | filter:search | orderBy:'title'" href="#/app/playlists/{{playlist.id}}">
         <img src="{{playlist.cover}}">
         <h2>{{playlist.title}}</h2>
         <p>{{playlist.content}}</p>

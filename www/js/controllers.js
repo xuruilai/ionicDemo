@@ -39,6 +39,13 @@ angular.module('starter.controllers', [])
       $scope.closeLogin();
     }, 1000);
   };
+
+  //Show the serch form
+  $scope.searchFlag = false;
+  $scope.showSearch = function(){
+        $scope.searchFlag = !$scope.searchFlag;
+
+  }
 })
 
 .controller('PlaylistsCtrl', ['$http','$scope', 'PlayListService', function($http, $scope, PlayList) {
@@ -53,7 +60,6 @@ angular.module('starter.controllers', [])
   //        alert("error");
   //      }
   //    );
-
   $scope.playlists = PlayList.query();
 }])
 
