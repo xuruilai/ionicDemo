@@ -4,30 +4,32 @@
       <ion-nav-back-button>
       </ion-nav-back-button>
 
-
       <ion-nav-buttons side="right">
         <button class="button button-icon button-clear ion-plus" menu-toggle="right">
         </button>
       </ion-nav-buttons>
     </ion-nav-bar>
-    <ion-nav-view name="menuContent" class="menuContent"></ion-nav-view>
+    <!-- tabs  -->
+    <ion-tabs class="tabs-stable tabs-icon-top">
+
+      <ion-tab href="#/app/wechatList" title="微信" icon-on="ion-ios-chatbubble balanced" icon-off="ion-ios-chatbubble-outline">
+        <ion-nav-view name="tab-wechat"></ion-nav-view>
+      </ion-tab>
+
+      <ion-tab href="#/app/search" title="通讯录" icon-on="ion-ios-people balanced" icon-off="ion-ios-people-outline">
+        <ion-nav-view name="tab-address"></ion-nav-view>
+      </ion-tab>
+
+      <ion-tab href="#/app/browse" title="发现" icon-on="ion-ios-navigate balanced" icon-off="ion-ios-navigate-outline">
+        <ion-nav-view name="tab-discover"></ion-nav-view>
+      </ion-tab>
+
+      <ion-tab title="我" icon-on="ion-ios-person balanced" icon-off="ion-ios-person-outline" on-select="login()" >
+        <ion-nav-view name="tab-user"></ion-nav-view>
+      </ion-tab>
+
+    </ion-tabs>
   </ion-side-menu-content>
-  <ion-tabs class="tabs-stable tabs-icon-top">
-
-
-    <ion-tab href="#/app/wechatList" title="微信" icon-on="ion-ios-chatbubble balanced" icon-off="ion-ios-chatbubble-outline">
-    </ion-tab>
-
-    <ion-tab href="#/app/search" title="通讯录" icon-on="ion-ios-people balanced" icon-off="ion-ios-people-outline">
-    </ion-tab>
-
-    <ion-tab href="#/app/browse" title="发现" icon-on="ion-ios-navigate balanced" icon-off="ion-ios-navigate-outline">
-    </ion-tab>
-
-    <ion-tab title="我" icon-on="ion-ios-person balanced" icon-off="ion-ios-person-outline" on-select="login()" >
-    </ion-tab>
-
-  </ion-tabs>
 
   <ion-side-menu side="right">
     <ion-header-bar class="bar-stable">
@@ -47,7 +49,7 @@
           <i class="icon  ion-person-add"></i>
           添加朋友
         </ion-item>
-        <ion-item class="item-icon-left" menu-close href="#/app/browse">
+        <ion-item class="item-icon-left" menu-close href="#/app/picture">
           <i class="icon  ion-qr-scanner"></i>
           掃一掃
         </ion-item>

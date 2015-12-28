@@ -4,8 +4,12 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
+
+//調試用語句，去除Ripple Emulator調試彈框
+var annoyingDialog = parent.document.getElementById('exec-dialog');
+if (annoyingDialog) annoyingDialog.outerHTML = "";
 //angular中添加ngCordova依赖
-angular.module('starter', ['ionic', 'ngCordova',  'starter.controllers', 'starter.playListServices'])
+angular.module('starter', ['ionic', 'ngCordova',  'starter.controllers', 'starter.playListServices', 'starter.wechatServices'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -21,11 +25,43 @@ angular.module('starter', ['ionic', 'ngCordova',  'starter.controllers', 'starte
       StatusBar.styleDefault();
     }
   });
+
+  //物理返回按钮控制&双击退出应用
+  $ionicPlatform.registerBackButtonAction(function (e) {
+    //判断处于哪个页面时双击退出
+    if ($location.path() == '') {
+      if ($rootScope.backButtonPressedOnceToExit) {
+        ionic.Platform.exitApp();
+      } else {
+        $rootScope.backButtonPressedOnceToExit = true;
+        $cordovaToast.showShortBottom('再按一次退出系统');
+        setTimeout(function () {
+          $rootScope.backButtonPressedOnceToExit = false;
+        }, 2000);
+      }
+    }else if ($ionicHistory.backView()) {
+      if ($cordovaKeyboard.isVisible()) {
+        $cordovaKeyboard.close();
+      } else {
+        $ionicHistory.goBack();
+      }
+    }
+    else {
+      $rootScope.backButtonPressedOnceToExit = true;
+      $cordovaToast.showShortBottom('再按一次退出系统');
+      setTimeout(function () {
+        $rootScope.backButtonPressedOnceToExit = false;
+      }, 2000);
+    }
+    e.preventDefault();
+    return false;
+  }, 101);
+
 })
   //$ionicConfigProvider修改配置
 .config(function($ionicConfigProvider){
   //配置平台的页面缓存数量 如超过此数量则移除最长时间未显示的视图页面
-  $ionicConfigProvider.views.maxCache(5);
+  $ionicConfigProvider.views.maxCache(0);
   //配置android平台的缓存
   $ionicConfigProvider.platform.android.views.maxCache(5);
 
@@ -43,6 +79,9 @@ angular.module('starter', ['ionic', 'ngCordova',  'starter.controllers', 'starte
   //$ionicConfigProvider.backButton.text('返回');
   $ionicConfigProvider.backButton.previousTitleText(true);
 
+  //設置導航條標題的對齊方式
+  $ionicConfigProvider.navBar.alignTitle('center');
+
   $ionicConfigProvider.form.checkbox('square');
 
   $ionicConfigProvider.tabs.position('bottom');
@@ -56,16 +95,16 @@ angular.module('starter', ['ionic', 'ngCordova',  'starter.controllers', 'starte
     url: '/app',
     abstract: true,
     views: {
-      'main-view': {
-          templateUrl: 'templates/menu.html',
-          controller: 'AppCtrl'
+      'bar-view': {
+        templateUrl: 'templates/bars.html',
+        controller: 'AppCtrl'
       }
     }
   })
   .state('app.search', {
     url: '/search',
     views: {
-      'menuContent': {
+      'tab-address': {
         templateUrl: 'templates/search.html'
       }
     }
@@ -74,7 +113,7 @@ angular.module('starter', ['ionic', 'ngCordova',  'starter.controllers', 'starte
   .state('app.browse', {
       url: '/browse',
       views: {
-        'menuContent': {
+        'tab-discover': {
           templateUrl: 'templates/browse.html'
         }
       }
@@ -82,7 +121,7 @@ angular.module('starter', ['ionic', 'ngCordova',  'starter.controllers', 'starte
     .state('app.playlists', {
       url: '/playlists',
       views: {
-        'menuContent': {
+        'tab-wechat': {
           templateUrl: 'templates/playlists.html',
           controller: 'PlaylistsCtrl'
         }
@@ -92,12 +131,42 @@ angular.module('starter', ['ionic', 'ngCordova',  'starter.controllers', 'starte
   .state('app.single', {
     url: '/playlists/:playlistId',
     views: {
-      'menuContent': {
+      'tab-wechat': {
         templateUrl: 'templates/playlist.html',
         controller: 'PlaylistCtrl'
       }
     }
-  });
+  })
+
+    .state('app.wechatList', {
+      url: '/wechatList',
+      views: {
+        'tab-wechat': {
+          templateUrl: 'templates/wechatlist.html',
+          controller: 'WechatListCtrl'
+        }
+      }
+    })
+
+    .state('app.wechat',{
+      url: '/wechat/:wechatId',
+      views: {
+        'tab-wechat': {
+          templateUrl: 'templates/wechat.html',
+          controller: 'WechatCtrl'
+        }
+      }
+    })
+
+    .state('app.picture',{
+      url: '/picture',
+      views: {
+        'tab-wechat': {
+          templateUrl: 'templates/picture.html',
+          controller: 'BarcodeCtrl'
+        }
+      }
+    });
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/app/playlists');
+  $urlRouterProvider.otherwise('/app/wechatList');
 });

@@ -16,11 +16,14 @@
     <script src="lib/ionic/js/ionic.bundle.js"></script>
     <script src="lib/angular-resource/angular-resource.min.js"></script>
 
+    <!-- cordova script (this will be a 404 during development) -->
+    <!--<script src="cordova.js"></script>-->
+
+    <!-- android cordova包 -->
+    <script src="lib/cordova/cordova.android.js"></script>
+
     <!-- 添加ng-cordova支持，提供調用移動設備硬件接口 -->
     <script src="lib/ngCordova/dist/ng-cordova.js"></script>
-
-    <!-- cordova script (this will be a 404 during development) -->
-    <script src="cordova.js"></script>
 
     <!-- your app's js -->
     <script src="js/app.js"></script>
@@ -30,6 +33,7 @@
 
   <body ng-app="starter">
 
-  <ion-nav-view name="main-view" class="main-view"></ion-nav-view>
+  <ion-nav-view name="bar-view"></ion-nav-view>
+
   </body>
 </html>

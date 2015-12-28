@@ -26,7 +26,6 @@ angular.module('starter.controllers', [])
 
   // Open the login modal
     $scope.login = function() {
-      console.log(123123);
     $scope.modal.show();
   };
 
@@ -46,7 +45,8 @@ angular.module('starter.controllers', [])
   $scope.showSearch = function(){
         $scope.searchFlag = !$scope.searchFlag;
 
-  }
+  };
+
 })
 
 .controller('PlaylistsCtrl', ['$http','$scope', 'PlayListService', function($http, $scope, PlayListService) {
@@ -68,7 +68,66 @@ angular.module('starter.controllers', [])
 
 
 .controller('PlaylistCtrl',['$http', '$scope', 'PlayListService', '$stateParams',function($http, $scope, PlayListService, $stateParams) {
-  console.log($stateParams);
   $scope.playList = PlayListService.get({id: $stateParams.playlistId});
   console.log($scope.playList);
-}]);
+}])
+
+.controller('WechatListCtrl',['$http', '$scope', 'WechatService', '$stateParams', function($http, $scope, wechatService, $stateParams){
+  $scope.wechatList = wechatService.query();
+}])
+
+.controller('WechatCtrl',['$http', '$scope', 'WechatService', '$stateParams',function($http, $scope, wechatService, $stateParams) {
+  $scope.wechat = wechatService.get({id: $stateParams.wechatId});
+}])
+
+.controller('PictureCtrl',['$scope', '$cordovaCamera', function($scope, $cordovaCamera){
+  document.addEventListener("deviceready", function () {
+    var options = {
+      quality: 50,
+      destinationType: Camera.DestinationType.DATA_URL,
+      sourceType: Camera.PictureSourceType.CAMERA,
+      allowEdit: true,
+      encodingType: Camera.EncodingType.JPEG,
+      targetWidth: 100,
+      targetHeight: 100,
+      popoverOptions: CameraPopoverOptions,
+      saveToPhotoAlbum: false,
+      correctOrientation:true
+    };
+
+    $cordovaCamera.getPicture(options).then(function(imageData) {
+      var image = document.getElementById('myImage');
+      image.src = "data:image/jpeg;base64," + imageData;
+    }, function(err) {
+      // error
+    });
+
+  }, false);
+}])
+  //二維碼掃描
+  .controller('BarcodeCtrl', function($scope, $cordovaBarcodeScanner) {
+
+    document.addEventListener("deviceready", function () {
+
+      $cordovaBarcodeScanner
+        .scan()
+        .then(function(barcodeData) {
+          // Success! Barcode data is here
+          console.log(barcodeData);
+        }, function(error) {
+          // An error occurred
+          console.log(error);
+        });
+
+
+      // NOTE: encoding not functioning yet
+      $cordovaBarcodeScanner
+        .encode(BarcodeScanner.Encode.TEXT_TYPE, "http://www.nytimes.com")
+        .then(function(success) {
+          // Success!
+        }, function(error) {
+          // An error occurred
+        });
+
+    }, false);
+  });

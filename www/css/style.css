@@ -1,1 +1,4 @@
 /* Empty. Add your own CSS if you like */
+.item-avatar-rectangle > img:first-child, .item-avatar-rectangle .item-image, .item-avatar-rectangle .item-content > img:first-child, .item-avatar-rectangle .item-content .item-image{
+  border-radius: 0%;
+}
