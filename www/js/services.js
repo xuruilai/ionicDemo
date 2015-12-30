@@ -33,3 +33,4 @@ wechatServices.factory('WechatService', ['$resource', function($resource){
 }]);
 
 
+

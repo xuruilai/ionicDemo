@@ -9,7 +9,8 @@
 var annoyingDialog = parent.document.getElementById('exec-dialog');
 if (annoyingDialog) annoyingDialog.outerHTML = "";
 //angular中添加ngCordova依赖
-angular.module('starter', ['ionic', 'ngCordova',  'starter.controllers', 'starter.playListServices', 'starter.wechatServices'])
+//加載ionic.service.core,用於app推送
+angular.module('starter', ['ionic','ionic.service.core', 'ngCordova',  'starter.controllers', 'starter.playListServices', 'starter.wechatServices'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -24,6 +25,19 @@ angular.module('starter', ['ionic', 'ngCordova',  'starter.controllers', 'starte
       // org.apache.cordova.statusbar required
       StatusBar.styleDefault();
     }
+
+    //添加推送代碼
+    var push = new Ionic.Push({
+      "debug": true
+    });
+
+    push.register(function(token) {
+      console.log("Device token:",token.token);
+      //alert(token.token);
+
+
+    });
+
   });
 
   //物理返回按钮控制&双击退出应用
@@ -161,9 +175,60 @@ angular.module('starter', ['ionic', 'ngCordova',  'starter.controllers', 'starte
     .state('app.picture',{
       url: '/picture',
       views: {
-        'tab-wechat': {
-          templateUrl: 'templates/picture.html',
+        'tab-address': {
+          templateUrl: 'templates/camera.html',
+          controller: 'CameraCtrl'
+        }
+      }
+    })
+
+    .state('app.scanBarcode',{
+      url: '/scanBarcode',
+      views: {
+        'tab-address': {
+          templateUrl: 'templates/scanBarcode.html',
           controller: 'BarcodeCtrl'
+        }
+      }
+    })
+
+    .state('app.geoPosition',{
+      url: '/geoPosition',
+      views: {
+        'tab-address': {
+          templateUrl: 'templates/geoPosition.html',
+          controller: 'GeoCtrl'
+        }
+      }
+    })
+  //推送消息
+    .state('app.pushNews',{
+      url: '/pushNews',
+      views: {
+        'tab-address': {
+          templateUrl: 'templates/browse.html',
+          controller: 'PushCtrl'
+        }
+      }
+    })
+  //檢查推送狀態
+    .state('app.checkPush',{
+      url: '/checkPush',
+      views: {
+        'tab-address': {
+          templateUrl: 'templates/browse.html',
+          controller: 'CheckPushCtrl'
+        }
+      }
+    })
+
+    //添加本地推送消息
+    .state('app.notification',{
+      url: '/notification',
+      views: {
+        'tab-address': {
+          templateUrl: 'templates/notification.html',
+          controller: 'NotificationCtrl'
         }
       }
     });
