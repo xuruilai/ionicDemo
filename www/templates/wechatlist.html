@@ -3,12 +3,12 @@
     <div class="list list-inset">
         <label class="item item-input">
           <i class="icon ion-search placeholder-icon"></i>
-          <input type="text" placeholder="Search" ng-model="search.$">
+          <input type="text" placeholder="Search" ng-model="search.$" value="{{key}}">
         </label>
     </div>
     <ion-list>
       <ion-item class="item item-avatar-left item-avatar-rectangle" ng-repeat="wechat in wechatList | filter:search | orderBy:'title'" href="#/app/wechat/{{wechat.id}}">
-        <img src="{{wechat.cover}}">
+        <!--<img src="{{wechat.cover}}">-->
         <h2>
           {{wechat.title}}
         <span class="item-note" style="">

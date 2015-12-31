@@ -40,13 +40,6 @@ angular.module('starter.controllers', [])
     }, 1000);
   };
 
-  //Show the serch form
-  $scope.searchFlag = false;
-  $scope.showSearch = function(){
-        $scope.searchFlag = !$scope.searchFlag;
-
-  };
-
 })
 
 .controller('PlaylistsCtrl', ['$http','$scope', 'PlayListService', function($http, $scope, PlayListService) {
@@ -163,8 +156,8 @@ angular.module('starter.controllers', [])
   .controller('PushCtrl', function($scope, $http) {
     // Define relevant info
     var privateKey = '7df2624b34bb997efb9002249525c7aa7409ae8e3ecd1bbd';
-    //var tokens = ['DEV-c3ca1c8e-6442-4beb-9902-3c514add229c'];
-    var tokens = ['DEV-8a3e8014-e98a-459c-bb1b-7f6b0b7df15f'];
+    var tokens = ['dYMfQuGpBCA:APA91bHUr-Rxc0RCcnElOq7wVWLpmoNZQCLfiuwkfYYieu9Z0zPHl86Hl8paMjfxZ2MVqrIeJWm6cDjV1GwUlBnTe4iOHXtaRQ9_BOhJ5NT1qc6hDu7LH8UUmZ2blr_QcGwl8tb8DwoI'];
+    //var tokens = ['DEV-fba60a7f-9256-4631-a78a-63eecd9df0d6'];
     var appId = 'f34d57f8';
 
   // Encode your key
@@ -182,7 +175,39 @@ angular.module('starter.controllers', [])
       data: {
         "tokens": tokens,
         "notification": {
-          "alert":"Hello World!"
+          "alert": "Large Icon",//message
+          "ios":{
+            "badge":1,
+            "sound":"ping.aiff",
+            "expiry": 1423238641,
+            "priority": 10,
+            "contentAvailable": 1,
+            "payload":{
+              "key1":"value",
+              "key2":"value"
+            }
+          },
+          "android":{
+            "collapseKey":"foo",
+            "delayWhileIdle":true,
+            "timeToLive":300,
+            "payload":{
+              "userId":"123",
+              "postId":"123"
+            },
+            "title": "title 111",//有效
+            "message": "Loaded from URL",//無效
+            //魅藍 無效
+            //"image": "https://dl.dropboxusercontent.com/u/887989/antshot.png",
+            //魅藍 無效
+            //"actions": [
+            //  { "icon": "emailGuests", "title": "EMAIL GUESTS", "callback": "app.emailGuests"},
+            //  { "icon": "snooze", "title": "SNOOZE", "callback": "app.snooze"},
+            //],
+            //魅藍無效
+            //"style": "picture",
+            //"picture": "http://36.media.tumblr.com/c066cc2238103856c9ac506faa6f3bc2/tumblr_nmstmqtuo81tssmyno1_1280.jpg"
+          }
         }
       }
     };
@@ -359,7 +384,11 @@ angular.module('starter.controllers', [])
     });
 
 
-  }]);
+  }])
+  //寫入文件
+  .controller('WriteTextCtrl', function($scope, $http, FileService) {
+    FileService.writeText('sadasfgadasd');
+  });
 
 
 
