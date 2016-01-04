@@ -12,7 +12,7 @@ if (annoyingDialog) annoyingDialog.outerHTML = "";
 //加載ionic.service.core,用於app推送
 angular.module('starter', ['ionic','ionic.service.core', 'ngCordova',  'starter.controllers', 'starter.playListServices', 'starter.wechatServices'])
 
-.run(function($ionicPlatform, NotificationService, FileService) {
+.run(function($ionicPlatform, $rootScope, $location, $ionicHistory, $cordovaToast, $cordovaKeyboard,  NotificationService, FileService) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -66,43 +66,51 @@ angular.module('starter', ['ionic','ionic.service.core', 'ngCordova',  'starter.
       }
     });
 
+    //推送註冊
     push.register();
+
+    //物理返回按钮控制&双击退出应用
+    $ionicPlatform.registerBackButtonAction(function (e) {
+      //判断处于哪个页面时双击退出
+      console.log($location.path());
+      if ($location.path() == '/app/search') {
+        if ($rootScope.backButtonPressedOnceToExit) {
+          ionic.Platform.exitApp();
+        } else {
+          $rootScope.backButtonPressedOnceToExit = true;
+          $cordovaToast.showShortBottom('再按一次退出系统');
+          setTimeout(function () {
+            $rootScope.backButtonPressedOnceToExit = false;
+          }, 2000);
+        }
+      }else if ($ionicHistory.backView()) {
+        if ($cordovaKeyboard.isVisible()) {
+          $cordovaKeyboard.close();
+        } else {
+          $ionicHistory.goBack();
+        }
+      }
+      else {
+        if ($rootScope.backButtonPressedOnceToExit) {
+          ionic.Platform.exitApp();
+        }else{
+          $rootScope.backButtonPressedOnceToExit = true;
+          $cordovaToast.showShortBottom('再按一次退出系统');
+          setTimeout(function () {
+            $rootScope.backButtonPressedOnceToExit = false;
+          }, 2000);
+        }
+      }
+      e.preventDefault();
+      return false;
+    }, 101);
 
 
 
 
   });
 
-  //物理返回按钮控制&双击退出应用
-  //$ionicPlatform.registerBackButtonAction(function (e) {
-  //  //判断处于哪个页面时双击退出
-  //  if ($location.path() == '') {
-  //    if ($rootScope.backButtonPressedOnceToExit) {
-  //      ionic.Platform.exitApp();
-  //    } else {
-  //      $rootScope.backButtonPressedOnceToExit = true;
-  //      $cordovaToast.showShortBottom('再按一次退出系统');
-  //      setTimeout(function () {
-  //        $rootScope.backButtonPressedOnceToExit = false;
-  //      }, 2000);
-  //    }
-  //  }else if ($ionicHistory.backView()) {
-  //    if ($cordovaKeyboard.isVisible()) {
-  //      $cordovaKeyboard.close();
-  //    } else {
-  //      $ionicHistory.goBack();
-  //    }
-  //  }
-  //  else {
-  //    $rootScope.backButtonPressedOnceToExit = true;
-  //    $cordovaToast.showShortBottom('再按一次退出系统');
-  //    setTimeout(function () {
-  //      $rootScope.backButtonPressedOnceToExit = false;
-  //    }, 2000);
-  //  }
-  //  e.preventDefault();
-  //  return false;
-  //}, 101);
+
 
 })
   //$ionicConfigProvider修改配置

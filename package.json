@@ -27,6 +27,7 @@
     "org.apache.cordova.file"
   ],
   "cordovaPlatforms": [
-    "android"
+    "android",
+    "ios"
   ]
 }
